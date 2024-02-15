@@ -4,6 +4,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const msg_username = document.getElementById('msg_username');
 const msg_email = document.getElementById('msg_email');
+const msg_dup = document.getElementById('msg_dup');
 const msg_password = document.getElementById('msg_password');
 
 // const studentParentPhone = document.getElementById('student_parent');
@@ -30,7 +31,7 @@ async function onSubmit(e) {
             msg_password.innerHTML = 'Please Enter Password!';
             setTimeout(() => msg_password.remove(), 3000);
         } else {
-            console.log(username.value, email.value, password.value);
+            // console.log(username.value, email.value, password.value);
 
             objUser = {
                 username: username.value,
@@ -39,21 +40,26 @@ async function onSubmit(e) {
                 // student_parent: studentParentPhone.value
             };
 
-            console.log(objUser);
+            // console.log(objUser);
 
             let res = await axios.post('http://localhost:4000/signup', objUser);
 
             console.log(res.data);
 
-            // studentName.value = '';
-            // studentEmail.value = '';
-            // studentPhone.value = '';
+            username.value = '';
+            email.value = '';
+            password.value = '';
             // studentParentPhone.value = '';
         }
 
 
 
     } catch (err) {
-        console.log(err);
+        console.log('err');
+        msg_dup.style.color = 'chocolate';
+        msg_dup.style.background = 'beige';
+        msg_dup.innerHTML = 'Sorry, the Email already Exists!';
+        setTimeout(() => msg_dup.remove(), 3000);
+        
     }
 }
