@@ -1,0 +1,64 @@
+const myForm = document.querySelector('#my-form');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const msg_email = document.getElementById('msg_email');
+const msg_password = document.getElementById('msg_password');
+
+// const studentParentPhone = document.getElementById('student_parent');
+
+myForm.addEventListener('submit', onSubmit);
+
+async function onSubmit(e) {
+    try {
+        e.preventDefault();
+
+        if (email.value === '') {
+            msg_email.style.color = 'chocolate';
+            msg_email.style.background = 'beige';
+            msg_email.innerHTML = 'Please Enter Email!';
+            setTimeout(() => msg_email.remove(), 3000);
+        } else if (password.value === '') {
+            msg_password.style.color = 'chocolate';
+            msg_password.style.background = 'beige';
+            msg_password.innerHTML = 'Please Enter Password!';
+            setTimeout(() => msg_password.remove(), 3000);
+        } else {
+            // console.log(username.value, email.value, password.value);
+
+            objUser = {
+                email: email.value,
+                password: password.value,
+                // student_parent: studentParentPhone.value
+            };
+
+            // console.log(objUser);
+
+            let res = await axios.post('http://localhost:4000/login', objUser);
+
+            console.log(res.data);
+
+            // username.value = '';
+            // email.value = '';
+            // password.value = '';
+            // studentParentPhone.value = '';
+        }
+
+
+
+    } catch (err) {
+        console.log(err.response.status);
+
+        if (err.response.status === 404) {
+            msg_dup.style.color = 'chocolate';
+            msg_dup.style.background = 'beige';
+            msg_dup.innerHTML = 'The Email is not Registered, Please Register!';
+            setTimeout(() => msg_dup.remove(), 3000);
+        }
+
+        // msg_dup.style.color = 'chocolate';
+        // msg_dup.style.background = 'beige';
+        // msg_dup.innerHTML = 'Sorry, the Email already Exists!';
+        // setTimeout(() => msg_dup.remove(), 3000);
+        
+    }
+}
