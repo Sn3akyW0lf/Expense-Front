@@ -37,6 +37,8 @@ async function onSubmit(e) {
 
             console.log(res.data);
 
+            alert('Successfully Logged in')
+
             // username.value = '';
             // email.value = '';
             // password.value = '';
@@ -53,6 +55,11 @@ async function onSubmit(e) {
             msg_dup.style.background = 'beige';
             msg_dup.innerHTML = 'The Email is not Registered, Please Register!';
             setTimeout(() => msg_dup.remove(), 3000);
+        } else if (err.response.status === 401) {
+            msg_wp.style.color = 'chocolate';
+            msg_wp.style.background = 'beige';
+            msg_wp.innerHTML = 'The Password is Wrong!';
+            setTimeout(() => msg_wp.remove(), 3000);            
         }
 
         // msg_dup.style.color = 'chocolate';
