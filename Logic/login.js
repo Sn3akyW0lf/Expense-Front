@@ -37,7 +37,9 @@ async function onSubmit(e) {
 
             console.log(res.data);
 
-            alert('Successfully Logged in')
+            // alert('Successfully Logged in');
+
+            window.location.replace('index.html');
 
             // username.value = '';
             // email.value = '';
@@ -48,7 +50,7 @@ async function onSubmit(e) {
 
 
     } catch (err) {
-        console.log(err.response.status);
+        console.log(err);
 
         if (err.response.status === 404) {
             msg_dup.style.color = 'chocolate';
