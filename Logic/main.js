@@ -17,8 +17,11 @@ myForm.addEventListener('submit', onSubmit);
 
 window.addEventListener('DOMContentLoaded', async () => {
     try {
-        let response = await axios.get('http://localhost:4000/expense/get-expenses');
-        console.log(response.data.allExpDetails);
+
+        const token = localStorage.getItem('token');
+
+        let response = await axios.get('http://localhost:4000/expense/get-expenses', { headers: { 'Authorization' : token } });
+        // console.log(response.data.allExpDetails);
         let data = response.data.allExpDetails;
 
         data.forEach(d => {
@@ -79,6 +82,8 @@ async function onSubmit(e) {
     try {
         e.preventDefault();
 
+        const token = localStorage.getItem('token');        
+
         if (expense.value === '') {
             msg_exp.style.color = 'chocolate';
             msg_exp.style.background = 'beige';
@@ -103,9 +108,9 @@ async function onSubmit(e) {
             console.log(expObj);
 
 
-            let res = await axios.post('http://localhost:4000/expense/add-expense', expObj);
+            let res = await axios.post('http://localhost:4000/expense/add-expense', expObj, { headers: { 'Authorization' : token } });
 
-            console.log(res.data.newExpDetail);
+            // console.log(res.data.newExpDetail);
 
             let data = res.data.newExpDetail;
 
@@ -171,12 +176,20 @@ async function onSubmit(e) {
 async function deleteExp(e) {
     try {
         // console.log(e);
+        
         let tr = e.parentElement;
         let tbl = tr.parentElement;
         let expense = expArr.find(u => u.id == e.innerHTML);
         // console.log(expense);
+        const token = localStorage.getItem('token');
 
-        let res = await axios.post(`http://localhost:4000/expense/delete-expense/${expense.id}`);
+        console.log(token);
+
+        const expenseObj = {
+            id: expense.id
+        };
+
+        let res = await axios.post(`http://localhost:4000/expense/delete-expense`, expenseObj, { headers: { 'Authorization' : token } });
         console.log(res);
         tbl.removeChild(tr);
     } catch (err) {

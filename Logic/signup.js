@@ -46,9 +46,11 @@ async function onSubmit(e) {
 
             console.log(res.data);
 
-            username.value = '';
-            email.value = '';
-            password.value = '';
+            window.location.replace('login.html');              
+
+            // username.value = '';
+            // email.value = '';
+            // password.value = '';
             // studentParentPhone.value = '';
         }
 

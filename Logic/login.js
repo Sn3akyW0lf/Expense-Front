@@ -35,9 +35,11 @@ async function onSubmit(e) {
 
             let res = await axios.post('http://localhost:4000/login', objUser);
 
-            console.log(res.data);
+            console.log(res);
 
-            // alert('Successfully Logged in');
+            alert(res.data.message);
+
+            localStorage.setItem('token', res.data.token);
 
             window.location.replace('index.html');
 
