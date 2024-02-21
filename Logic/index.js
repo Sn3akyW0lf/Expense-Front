@@ -21,8 +21,15 @@ window.addEventListener('DOMContentLoaded', async () => {
         const token = localStorage.getItem('token');
 
         let response = await axios.get('http://localhost:4000/expense/get-expenses', { headers: { 'Authorization' : token } });
-        // console.log(response.data.allExpDetails);
+        console.log(response.data);
         let data = response.data.allExpDetails;
+
+        if (response.data.userData.ispremiumuser) {
+            razorPremium.className = 'd-none';
+            msg_premium.style.color = 'chocolate';            
+            msg_premium.innerHTML = 'You Are a Premium Member!';
+            btnLeader.className = 'btn btn-warning btn-sm btn-outline-dark p-3 m-3';
+        }
 
         data.forEach(d => {
             let tr = document.createElement('tr');
@@ -234,6 +241,11 @@ document.getElementById('razorPremium').onclick = async function(e) {
             }, { headers: { 'Authorization' : token } })
 
             alert('Congratulations! You are Now a Premium Member!');
+
+            razorPremium.className = 'd-none';
+            msg_premium.style.color = 'chocolate';
+            msg_premium.style.color = 'chocolate';            
+            msg_premium.innerHTML = 'You Are a Premium Member!';
         }
     };
 
@@ -250,3 +262,38 @@ document.getElementById('razorPremium').onclick = async function(e) {
         alert('Something Went Wrong!');
     })
 };
+
+document.getElementById('btnLeader').onclick = async function(e) {
+    const token = localStorage.getItem('token');
+
+    let result = await axios.get('http://localhost:4000/premium/show-leaderboard', { headers: { 'Authorization' : token } });
+
+    premium_leader.className = 'container';
+
+    const data = result.data;
+
+    data.forEach(d => {
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+
+
+        td1.appendChild(document.createTextNode(`${d.name}`));
+        td2.appendChild(document.createTextNode(`${d.totalExp}`));
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tblLeader.appendChild(tr);
+
+        expObj = {
+            expense: d.amount,
+            exp_desc: d.description,
+            exp_type: d.expType,
+            id: d.id
+        };
+        expArr.push(expObj);
+    });
+
+    console.log(data);
+}
+

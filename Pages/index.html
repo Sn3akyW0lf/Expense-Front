@@ -14,9 +14,29 @@
 </head>
 
 <body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="index.html" class="navbar-brand">Expense Tracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a href="index.html" class="nav-link active">Show Expenses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="add-expense.html" class="nav-link">Add New Expense</a>
+                </li>
+                <li class="nav-item">
+                    <a href="leaderboard.html" class="nav-link">LeaderBoard</a>
+                </li>
+            </ul>
+        </div>
+    </nav> -->
     <div class="container">
+        <div id="msg_premium"></div>
         <button id="razorPremium" class="btn btn-warning btn-sm btn-outline-dark p-3 m-3">Get Premium</button>
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>        
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     </div>
     <div class="container">
         <form id="my-form" class="text-bg-secondary bg-opacity-20 border border-dark border-size-3 rounded-3 p-5 m-3" method="POST">
@@ -26,20 +46,22 @@
                     <span class="card-text">
                         Tracking and Maintaining all the Expenses Occured.
                     </span>
-                    
+
                 </div>
             </div>
-            
+
             <div>
                 <div id="msg_exp"></div>
                 <label for="expense" class="form-label">Enter Expense Amount</label>
-                <input type="number" id="expense" value="" class="form-control text-bg-dark form-control-sm" placeholder="Enter Your Expense Amount" />
-                
+                <input type="number" id="expense" value="" class="form-control text-bg-dark form-control-sm" placeholder="Enter Your Expense Amount"
+                />
+
             </div>
             <div>
                 <div id="msg_desc"></div>
                 <label for="exp_desc" class="form-label">More About Where You Spent</label>
-                <input type="text" id="exp_desc" value="" class="form-control text-bg-dark form-control-sm" placeholder="Expense Description" />
+                <input type="text" id="exp_desc" value="" class="form-control text-bg-dark form-control-sm" placeholder="Expense Description"
+                />
             </div>
             <div>
                 <div id="msg_exp_type"></div>
@@ -52,37 +74,63 @@
                     <option value="Grocery">Grocery</option>
                     <option value="Fuel">Fuel</option>
                     <option value="Shopping">Shopping</option>
-                    <option value="Leisure">Leisure</option>                    
+                    <option value="Leisure">Leisure</option>
                 </select>
-            </div>    
+            </div>
             <input type="submit" value="LOG EXPENSE" class="btn btn-sm btn-outline-light p-3 m-3" />
         </form>
-        <div class="container text-bg-secondary rounded-2 p-2">
-             <center><h2 class="title">Previous Expenses</h2></center>
-             <table class="table table-bordered rounded-2 p-2">
-                <thead>
-                    <tr>
-                        <th class="d-none">
-                            id
-                        </th>
-                        <th>
-                            Expense
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                        <th>
-                            Expense Type
-                        </th>
-                        <th>
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="tblExpense">
-                </tbody>
-            </table>
-        </div>
+        <button id="btnLeader" class="d-none">Show LeaderBoard</button>
+    </div>
+    <div class="container text-bg-secondary rounded-2 p-2">
+        <center>
+            <h2 class="title">Previous Expenses</h2>
+        </center>
+        <table class="table table-bordered rounded-2 p-2">
+            <thead>
+                <tr>
+                    <th class="d-none">
+                        id
+                    </th>
+                    <th>
+                        Expense
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Expense Type
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tblExpense">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-none" id="premium_leader">
+        <center>
+            <h2 class="title">Expense LeaderBoard</h2>
+        </center>
+        <table class="table table-bordered rounded-2 p-2">
+            <thead>
+                <tr>
+                    <th class="d-none">
+                        id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Expenses
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tblLeader">
+            </tbody>
+        </table>
     </div>
 
 
