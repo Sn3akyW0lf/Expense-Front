@@ -216,3 +216,37 @@ function editExp(e) {
         records.removeChild(li);
     }
 }
+
+document.getElementById('razorPremium').onclick = async function(e) {
+    const token = localStorage.getItem('token');
+
+    const response = await axios.get('http://localhost:4000/purchase/purchase-membership', { headers: { 'Authorization' : token } });
+
+    console.log(response);
+
+    let options = {
+        'key' : response.data.key_id,
+        'order_id' : response.data.order.id,
+        'handler' : async function (response) {
+            await axios.post('http://localhost:4000/purchase/update-transaction-status', {
+                order_id : options.order_id,
+                payment_id : response.razorpay_payment_id
+            }, { headers: { 'Authorization' : token } })
+
+            alert('Congratulations! You are Now a Premium Member!');
+        }
+    };
+
+    const rzpl = new Razorpay(options);
+    rzpl.open();
+    e.preventDefault();
+
+    rzpl.on('payment.failed', async function (response){
+        console.log(response);
+        await axios.post('http://localhost:4000/purchase/failed-transaction', {
+            order_id: options.order_id
+        }, { headers: { 'Authorization' : token } })
+
+        alert('Something Went Wrong!');
+    })
+};
