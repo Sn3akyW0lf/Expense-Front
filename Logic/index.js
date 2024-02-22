@@ -235,6 +235,8 @@ document.getElementById('razorPremium').onclick = async function(e) {
 
             alert('Congratulations! You are Now a Premium Member!');
 
+            localStorage.setItem('isPremium', 1);
+
             razorPremium.className = 'd-none';
             msg_premium.style.color = 'chocolate';
             msg_premium.style.color = 'chocolate';            

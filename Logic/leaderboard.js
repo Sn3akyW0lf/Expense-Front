@@ -24,8 +24,8 @@ window.addEventListener('DOMContentLoaded', async () => {
             let td2 = document.createElement('td');
 
             td1.appendChild(document.createTextNode(`${d.name}`));
-            if (d.total_expense) {
-                td2.appendChild(document.createTextNode(`${d.total_expense}`));
+            if (d.totalExpense) {
+                td2.appendChild(document.createTextNode(`${d.totalExpense}`));
             } else {
                 td2.appendChild(document.createTextNode(0));
             }
