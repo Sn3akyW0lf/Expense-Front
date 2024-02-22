@@ -22,14 +22,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a href="index.html" class="nav-link active">Show Expenses</a>
+                    <a href="index.html" class="nav-link">Show Expenses</a>
                 </li>
                 <li class="nav-item">
                     <a href="add-expense.html" class="nav-link">Add New Expense</a>
                 </li>
                 <li class="nav-item">
-                    <a href="leaderboard.html" class="nav-link">LeaderBoard</a>
+                    <a href="leaderboard.html" class="nav-link active">LeaderBoard</a>
                 </li>
+                <!-- <li class="nav-item">
+                    <a href="add-student.html" class="nav-link">Add Student</a>
+                </li> -->
             </ul>
         </div>
     </nav>
@@ -37,11 +40,11 @@
         <div id="msg_premium"></div>
         <button id="razorPremium" class="btn btn-warning btn-sm btn-outline-dark p-3 m-3">Get Premium</button>
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-        <a href="add-expense.html" class="btn btn-info btn-sm btn-outline-dark p-3 m-3">Add new Expense</a>        
     </div>
-    <div class="container text-bg-secondary rounded-2 p-2">
+
+    <div class="d-none" id="premium_leader">
         <center>
-            <h2 class="title">Previous Expenses</h2>
+            <h2 class="title">Expense LeaderBoard</h2>
         </center>
         <table class="table table-bordered rounded-2 p-2">
             <thead>
@@ -50,25 +53,19 @@
                         id
                     </th>
                     <th>
-                        Expense
+                        Name
                     </th>
                     <th>
-                        Description
-                    </th>
-                    <th>
-                        Expense Type
-                    </th>
-                    <th>
-                        Action
+                        Expenses
                     </th>
                 </tr>
             </thead>
-            <tbody id="tblExpense">
+            <tbody id="tblLeader">
             </tbody>
         </table>
     </div>
 
-    <script src="../Logic/index.js"></script>
+    <script src="../Logic/leaderboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
 </body>
 

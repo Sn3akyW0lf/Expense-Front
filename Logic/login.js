@@ -36,10 +36,14 @@ async function onSubmit(e) {
             let res = await axios.post('http://localhost:4000/login', objUser);
 
             console.log(res);
+            console.log(res.data.premium);
 
-            alert(res.data.message);
+            let prem = res.data.premium ? 1 : 0;
+
+            // alert(res.data.message);
 
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('isPremium', prem);
 
             window.location.replace('index.html');
 

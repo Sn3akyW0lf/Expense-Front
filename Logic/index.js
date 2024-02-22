@@ -1,14 +1,7 @@
-const myForm = document.querySelector('#my-form');
-const expense = document.querySelector('#expense');
-const exp_desc = document.querySelector('#exp_desc');
-const exp_type = document.querySelector('#exp_type');
-const msg_exp = document.querySelector('#msg_exp');
-const msg_exp_type = document.querySelector('#msg_exp_type');
-const msg_desc = document.querySelector('#msg_desc');
 const tblExpense = document.getElementById('tblExpense');
 var expArr = [];
 
-myForm.addEventListener('submit', onSubmit);
+// myForm.addEventListener('submit', onSubmit);
 
 // records.addEventListener('click', remExp);
 // records.addEventListener('click', editExp);
@@ -19,16 +12,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     try {
 
         const token = localStorage.getItem('token');
+        const isPremium = localStorage.getItem('isPremium');
+
+        console.log(isPremium === true)
 
         let response = await axios.get('http://localhost:4000/expense/get-expenses', { headers: { 'Authorization' : token } });
         console.log(response.data);
         let data = response.data.allExpDetails;
 
-        if (response.data.userData.ispremiumuser) {
-            razorPremium.className = 'd-none';
-            msg_premium.style.color = 'chocolate';            
-            msg_premium.innerHTML = 'You Are a Premium Member!';
-            btnLeader.className = 'btn btn-warning btn-sm btn-outline-dark p-3 m-3';
+        if (isPremium == true) {
+            premiumMessage();
         }
 
         data.forEach(d => {
@@ -263,37 +256,43 @@ document.getElementById('razorPremium').onclick = async function(e) {
     })
 };
 
-document.getElementById('btnLeader').onclick = async function(e) {
-    const token = localStorage.getItem('token');
+// document.getElementById('btnLeader').onclick = async function(e) {
+//     const token = localStorage.getItem('token');
 
-    let result = await axios.get('http://localhost:4000/premium/show-leaderboard', { headers: { 'Authorization' : token } });
+//     let result = await axios.get('http://localhost:4000/premium/show-leaderboard', { headers: { 'Authorization' : token } });
 
-    premium_leader.className = 'container';
+//     premium_leader.className = 'container';
 
-    const data = result.data;
+//     const data = result.data;
 
-    data.forEach(d => {
-        let tr = document.createElement('tr');
-        let td1 = document.createElement('td');
-        let td2 = document.createElement('td');
+//     data.forEach(d => {
+//         let tr = document.createElement('tr');
+//         let td1 = document.createElement('td');
+//         let td2 = document.createElement('td');
 
 
-        td1.appendChild(document.createTextNode(`${d.name}`));
-        td2.appendChild(document.createTextNode(`${d.totalExp}`));
+//         td1.appendChild(document.createTextNode(`${d.name}`));
+//         td2.appendChild(document.createTextNode(`${d.totalExp}`));
 
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tblLeader.appendChild(tr);
+//         tr.appendChild(td1);
+//         tr.appendChild(td2);
+//         tblLeader.appendChild(tr);
 
-        expObj = {
-            expense: d.amount,
-            exp_desc: d.description,
-            exp_type: d.expType,
-            id: d.id
-        };
-        expArr.push(expObj);
-    });
+//         expObj = {
+//             expense: d.amount,
+//             exp_desc: d.description,
+//             exp_type: d.expType,
+//             id: d.id
+//         };
+//         expArr.push(expObj);
+//     });
 
-    console.log(data);
+//     console.log(data);
+// }
+
+function premiumMessage () {
+    razorPremium.className = 'd-none';
+    msg_premium.style.color = 'chocolate';            
+    msg_premium.innerHTML = 'You Are a Premium Member!';
+    // btnLeader.className = 'btn btn-warning btn-sm btn-outline-dark p-3 m-3';
 }
-
