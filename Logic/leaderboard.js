@@ -4,6 +4,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
     if (isPremium == true) {
+        razorPremium.className = 'd-none';
+
         let result = await axios.get('http://localhost:4000/premium/show-leaderboard', {
             headers: {
                 'Authorization': token
@@ -11,8 +13,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         });
 
         console.log(result);
-        razorPremium.className = 'd-none';
-
 
         premium_leader.className = 'container';
 
@@ -23,9 +23,12 @@ window.addEventListener('DOMContentLoaded', async () => {
             let td1 = document.createElement('td');
             let td2 = document.createElement('td');
 
-
             td1.appendChild(document.createTextNode(`${d.name}`));
-            td2.appendChild(document.createTextNode(`${d.totalExp}`));
+            if (d.total_expense) {
+                td2.appendChild(document.createTextNode(`${d.total_expense}`));
+            } else {
+                td2.appendChild(document.createTextNode(0));
+            }
 
             tr.appendChild(td1);
             tr.appendChild(td2);
