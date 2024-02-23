@@ -43,7 +43,7 @@ async function onSubmit(e) {
 
             console.log(res);
 
-            // window.location.replace('index.html');
+            window.location.replace('index.html');
 
             // console.log(expObj);
         }
