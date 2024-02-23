@@ -14,33 +14,16 @@ async function onSubmit(e) {
             msg_email.innerHTML = 'Please Enter Email!';
             setTimeout(() => msg_email.remove(), 3000);
         } else {
-            // console.log(username.value, email.value, password.value);
+            console.log(email.value);
 
             objUser = {
                 email: email.value
                 // student_parent: studentParentPhone.value
             };
 
-            // console.log(objUser);
-
             let res = await axios.post('http://localhost:4000/password/forgot-password', objUser);
 
             console.log(res);
-            // console.log(res.data.premium);
-
-            // let prem = res.data.premium ? 1 : 0;
-
-            // alert(res.data.message);
-
-            // localStorage.setItem('token', res.data.token);
-            // localStorage.setItem('isPremium', prem);
-
-            // window.location.replace('index.html');
-
-            // username.value = '';
-            // email.value = '';
-            // password.value = '';
-            // studentParentPhone.value = '';
         }
 
 
