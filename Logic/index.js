@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
             let del = document.createElement('button');
             del.className = 'btn btn-danger btn-sm float-right delete';
-            del.appendChild(document.createTextNode('X'));
+            del.appendChild(document.createTextNode('Delete Expense'));
             del.addEventListener('click', function () {
                 deleteExp(td1);
             });
@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             edit.appendChild(document.createTextNode('Edit'));
 
             td5.appendChild(del);
-            td5.appendChild(edit);
+            // td5.appendChild(edit);
 
             tr.appendChild(td1);
             tr.appendChild(td2);
