@@ -32,9 +32,10 @@ async function onSubmit(e) {
             setTimeout(() => msg_exp_type.remove(), 3000);
         } else {
             let expObj = {
-                expense: expense.value,
-                exp_desc: exp_desc.value,
-                exp_type: exp_type.value
+                amount: expense.value,
+                category: exp_type.value,
+                description: exp_desc.value
+                
             }
             console.log(expObj);
 
