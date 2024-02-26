@@ -11,12 +11,16 @@ var expArr = [];
 window.addEventListener('DOMContentLoaded', async () => {
     try {
 
+        const objUrlParams = new URLSearchParams(window.location.search);
+        console.log(objUrlParams);
+        const page = objUrlParams.get('page') || 1;
+
         const token = localStorage.getItem('token');
         const isPremium = localStorage.getItem('isPremium');
 
         console.log(isPremium === true)
 
-        let response = await axios.get('http://localhost:4000/expense/get-expenses', { headers: { 'Authorization' : token } });
+        let response = await axios.get(`http://localhost:4000/expense/get-expenses?page=${page}`, { headers: { 'Authorization' : token } });
         console.log(response.data);
         let data = response.data.allExpDetails;
 

@@ -67,7 +67,7 @@ async function onSubmit(e) {
             msg_wp.style.color = 'chocolate';
             msg_wp.style.background = 'beige';
             msg_wp.innerHTML = 'The Password is Wrong!';
-            setTimeout(() => msg_wp.remove(), 3000);            
+            setTimeout(() => msg_wp.remove(), 3000);
         }
 
         // msg_dup.style.color = 'chocolate';
