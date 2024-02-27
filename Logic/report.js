@@ -170,6 +170,7 @@ document.getElementById('razorPremium').onclick = async function (e) {
 function premiumMessage() {
     razorPremium.className = 'd-none';
     msg_premium.style.color = 'chocolate';
+    msg_premium.className = 'align-self-center';    
     msg_premium.innerHTML = 'You Are a Premium Member!';
     // btnLeader.className = 'btn btn-warning btn-sm btn-outline-dark p-3 m-3';
 }

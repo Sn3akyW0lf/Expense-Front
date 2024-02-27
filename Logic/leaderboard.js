@@ -37,6 +37,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         });
     } else {
         msg_premium.style.color = 'chocolate';
+        msg_premium.className = 'align-self-center';        
         msg_premium.innerHTML = 'This is a Premium Member Feature, Please Purchase Membership to Access this Page!';
     }
 
