@@ -46,50 +46,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         listExpense(allExpDetails);
         showPagination(pageData);
 
-        // data.forEach(d => {
-        //     let tr = document.createElement('tr');
-        //     let td1 = document.createElement('td');
-        //     let td2 = document.createElement('td');
-        //     let td3 = document.createElement('td');
-        //     let td4 = document.createElement('td');
-        //     let td5 = document.createElement('td');
-
-
-        //     td1.appendChild(document.createTextNode(`${d.id}`));
-        //     td1.className = 'd-none';
-        //     td2.appendChild(document.createTextNode(`${d.amount}`));
-        //     td3.appendChild(document.createTextNode(`${d.description}`));
-        //     td4.appendChild(document.createTextNode(`${d.category}`));
-
-        //     let del = document.createElement('button');
-        //     del.className = 'btn btn-danger btn-sm float-right delete';
-        //     del.appendChild(document.createTextNode('Delete Expense'));
-        //     del.addEventListener('click', function () {
-        //         deleteExp(td1);
-        //     });
-
-        //     let edit = document.createElement('button');
-        //     edit.className = 'btn btn-info btn-sm float-right edit';
-        //     edit.appendChild(document.createTextNode('Edit'));
-
-        //     td5.appendChild(del);
-        //     // td5.appendChild(edit);
-
-        //     tr.appendChild(td1);
-        //     tr.appendChild(td2);
-        //     tr.appendChild(td3);
-        //     tr.appendChild(td4);
-        //     tr.appendChild(td5);
-        //     tblExpense.appendChild(tr);
-
-        //     expObj = {
-        //         expense: d.amount,
-        //         exp_desc: d.description,
-        //         exp_type: d.expType,
-        //         id: d.id
-        //     };
-        //     expArr.push(expObj);
-        // });
     } catch (err) {
         console.log(err);
     }
@@ -185,12 +141,14 @@ document.getElementById('razorPremium').onclick = async function (e) {
 function premiumMessage() {
     razorPremium.className = 'd-none';
     msg_premium.style.color = 'chocolate';
-    msg_premium.className = 'align-self-center';
+    msg_premium.className = 'align-self-center col-auto';
     msg_premium.innerHTML = 'You Are a Premium Member!';
     // btnLeader.className = 'btn btn-warning btn-sm btn-outline-dark p-3 m-3';
 }
 
 function listExpense(data) {
+    tblExpense.innerHTML = '';
+    
     data.forEach(d => {
         let tr = document.createElement('tr');
         let td1 = document.createElement('td');
@@ -231,7 +189,9 @@ function listExpense(data) {
 }
 
 async function getExpenses (page) {
-    let response = await axios.get(`http://localhost:4000/expense/get-expenses?page=${page}`, {
+    const row = localStorage.getItem('rowSize');
+    
+    let response = await axios.get(`http://localhost:4000/expense/get-expenses?page=${page}&rowsize=${row}`, {
         headers: {
             'Authorization': token
         }
@@ -260,7 +220,7 @@ function showPagination({
         if (hasPreviousPage) {
             const btn2 = document.createElement('button');
             btn2.innerHTML = previousPage;
-            btn2.addEventListener('click', () => showExpenses(previousPage));
+            btn2.addEventListener('click', () => getExpenses(previousPage));
             pagiantion.appendChild(btn2);
         }
 
@@ -272,7 +232,7 @@ function showPagination({
         if (hasNextPage) {
             const btn3 = document.createElement('button');
             btn3.innerHTML = nextPage;
-            btn3.addEventListener('click', () => showExpenses(nextPage));
+            btn3.addEventListener('click', () => getExpenses(nextPage));
             pagiantion.appendChild(btn3);
         }
 }
